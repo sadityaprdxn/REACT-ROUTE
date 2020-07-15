@@ -11,9 +11,13 @@ import {
 const Landingpage = ({logout}) => {
     
     const history = useHistory();
+    const parameters = useParams();
 
     const userLogout = () => {
-        logout();
+        const auth = {user: parameters.user, isLogin: false };
+        logout(auth);
+        const stringifyAuth = JSON.stringify(auth);
+        window.localStorage.setItem("SESSION" , stringifyAuth);
         history.push('/');
     }
     

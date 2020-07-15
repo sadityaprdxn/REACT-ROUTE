@@ -1,26 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 import '../scss/App.scss';
 import Loginpage from './Loginpage';
 import Landingpage from './Landingpage';
-import Errorpage from './Error'
+import Errorpage from './Error';
 import {
   BrowserRouter as Router,
   Route,
   Switch,
-  useParams,
-  Redirect
-} from 'react-router-dom'
+  Redirect,
+  useLocation,
+  useHistory,
+} from 'react-router-dom';
 
 function App() {
 
-  const [isLogin , changeStatus] = useState(false);
+  const [isLogin , changeStatus] = useState({user: null, isLogin: false });
 
-  const loginUser = () => {
-    changeStatus(true);
+  const loginUser = (auth) => {
+    changeStatus(auth);
   }
 
-  const logoutUser = () => {
-    changeStatus(false);
+  const logoutUser = (auth) => {
+    changeStatus(auth);
   }
 
   return (
@@ -29,7 +30,7 @@ function App() {
         <Route path="/" exact>
           <Loginpage login = {loginUser}/>
         </Route>
-        <Route path="/landingpage" exact>
+        <Route path="/landingpage/:user" exact>
           {isLogin ? 
           <Landingpage logout = {logoutUser} /> : 
           <Redirect to='/' />

@@ -11,7 +11,7 @@ import Data from '../data/userdata.json';
 const Loginpage = ({login}) => {
     
     const history = useHistory();
-    const [allFieldsRight , setField] = useState({usernameField: null , passwordField: null});
+    const [allFieldsRight , setField] = useState({usernameField: null , passwordField: null , userid: null});
     const [values , setValues] = useState({username : "", password: ""})
 
     const userLogin = (e) => {
@@ -19,16 +19,17 @@ const Loginpage = ({login}) => {
 
         for(let i = 0; i < Data.length; i++){
 
-            const {username, password} = Data[i];
+            const {username, password, id} = Data[i];
 
             if(values.username === username){
-                setField({usernameField: "success" , passwordField: "error"});
+                setField({usernameField: "success" , passwordField: "error" , userid: null});
                 
 
                 if(values.password === password) {
-                    setField({usernameField: "success" , passwordField: "success"});
+                    setField({usernameField: "success" , passwordField: "success" , userid: id});
                     console.log(allFieldsRight);
                 }
+
                 break;
             } else {
                 setField({usernameField: "error" , passwordField: "error"});
@@ -41,11 +42,25 @@ const Loginpage = ({login}) => {
         
             if(allFieldsRight.usernameField === "success" && allFieldsRight.passwordField === "success") {
                         
-                login();
-                history.push('/landingpage');
+                const auth = {user: allFieldsRight.userid, isLogin: true };
+                login(auth);
+                const stringifyAuth = JSON.stringify(auth);
+                window.localStorage.setItem("SESSION" , stringifyAuth);
+                history.push(`/landingpage/${allFieldsRight.userid}`);
             }
         }
     )
+
+    useEffect(() => {
+        if(window.localStorage['SESSION']) {
+        
+        const auth = JSON.parse(window.localStorage.getItem("SESSION"))
+        if(auth.isLogin === true) {
+            login(auth);
+            history.push(`/landingpage/${auth.userid}`);
+        }
+        }
+    }, []);
 
     const controlField = (e) => {
         const value = e.target.value;

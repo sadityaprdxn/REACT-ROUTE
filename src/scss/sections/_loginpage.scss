@@ -1,5 +1,5 @@
 .login-page {
-	padding: 100px 0;
+	padding: 50px 0;
 	background-color: $secondaryColor;
 	text-align: center;
 
@@ -15,7 +15,7 @@
 		border-style: none;
 		border-bottom-left-radius: 10px;
 		border-top-right-radius: 10px;
-		background-color: transparentize($white, 0.5);
+		background-color: transparentize($white, 0.09);
 		@include textcharacteristics($black, 12px, 800, uppercase);
 		transition: 0.3s ease-in-out;
 		outline: none;
@@ -23,5 +23,43 @@
 		&:hover {
 			background-color: transparentize($white, 0.7);
 		}
+	}
+
+	.form-group {
+		text-align: center;
+
+		span {
+			width: 40%;
+			padding: 5px;
+			border-radius: 5px;
+			margin-bottom: 5px;
+			display: inline-block;
+			@include textcharacteristics(red, 12px, 800, uppercase);
+			background-color: rgb(255, 218, 218);
+			box-sizing: border-box;
+			opacity: 0;
+		}
+
+		&.error {
+			span {
+				opacity: 1;
+			}
+		}
+	}
+
+	input {
+		width: 40%;
+		display: block;
+        padding: 10px 20px;
+		border-style: none;
+		border: 2px solid transparent;
+        border-bottom-left-radius: 10px;
+        border-top-right-radius: 10px;
+        margin: 0 auto 5px auto;
+        background-color: rgba(255,255,255,0.5);
+        outline: none;
+        font-size: 12px;
+        text-transform: uppercase;
+        box-sizing: border-box;
 	}
 }

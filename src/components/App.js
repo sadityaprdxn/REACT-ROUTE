@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import '../scss/App.scss';
 import Loginpage from './Loginpage';
 import Landingpage from './Landingpage';
+import Errorpage from './Error'
 import {
   BrowserRouter as Router,
   Route,
@@ -33,6 +34,9 @@ function App() {
           <Landingpage logout = {logoutUser} /> : 
           <Redirect to='/' />
           }
+        </Route>
+        <Route path="*">
+            <Errorpage/>
         </Route>
       </Switch>
     </Router>

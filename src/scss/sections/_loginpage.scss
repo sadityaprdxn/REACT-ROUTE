@@ -1,0 +1,27 @@
+.login-page {
+	padding: 100px 0;
+	background-color: $secondaryColor;
+	text-align: center;
+
+	h2 {
+		padding-bottom: 20px;
+		font-family: 'edosz';
+		@include textcharacteristics($black, 20px, 400, uppercase);
+		text-align: center;
+	}
+
+	button {
+		padding: 7px 50px;
+		border-style: none;
+		border-bottom-left-radius: 10px;
+		border-top-right-radius: 10px;
+		background-color: transparentize($white, 0.5);
+		@include textcharacteristics($black, 12px, 800, uppercase);
+		transition: 0.3s ease-in-out;
+		outline: none;
+
+		&:hover {
+			background-color: transparentize($white, 0.7);
+		}
+	}
+}
